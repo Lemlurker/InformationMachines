@@ -12,6 +12,7 @@ namespace game4automation
         public GameObject On;
         public GameObject Off;
         public GameObject Boolean1;
+        public OPCUA_Node OPCUANode;
         public string nodeID;
         public string Value;
         
@@ -27,9 +28,10 @@ namespace game4automation
         // Update is called once per frame
         void Update()
         {
-            
-            
-            if (BooleanOutput == "True")
+            Value = OPCUANode.Value;
+
+
+            if (Value == "True")
             {
                 On.SetActive(true);
                 Off.SetActive(false);

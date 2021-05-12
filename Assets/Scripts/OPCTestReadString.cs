@@ -12,7 +12,7 @@ namespace game4automation
     {
 
         public TextMeshPro Text;
-        public OPCUA_Node OPCUANode;
+        public OPCUA_Node OPCUANodeMachine;
 
 
         public string stringOutput;
@@ -26,7 +26,7 @@ namespace game4automation
         // Update is called once per frame
         void Update()
         {
-            stringOutput = OPCUANode.Value;
+            stringOutput = OPCUANodeMachine.Value;
             Text.text = stringOutput;
 
             
