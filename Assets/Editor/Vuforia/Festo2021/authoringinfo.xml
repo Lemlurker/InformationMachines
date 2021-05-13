@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<QCARInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="QCAR_Dataset_info.xsd">
+    <TargetSet version="3.4">
+        <AreaTarget version="2.1" bbox="-4.8460 -1.5782 -1.5686 1.3557 0.4440 6.3660" targetId="86bd927b87c845b9bf3a643d2a068f2a" name="Festo2021" pathAuthoring="86bd927b87c845b9bf3a643d2a068f2a_authoring.glb" pathOcclusion="86bd927b87c845b9bf3a643d2a068f2a_occlusion.3dt" pathNavMesh="86bd927b87c845b9bf3a643d2a068f2a_navmesh.glb" />
+    </TargetSet>
+</QCARInfo>
