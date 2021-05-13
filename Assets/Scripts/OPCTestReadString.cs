@@ -13,6 +13,12 @@ namespace game4automation
 
         public TextMeshPro Text;
         public OPCUA_Node OPCUANodeMachine;
+        public ServerControlMaster Control;
+        public int AltValue;
+        public float InterGateTime;
+        public float CurrentTime;
+        public OPCTestRead PreviousBool;
+        private bool ActivateNextBeenActive;
 
 
         public string stringOutput;
@@ -20,14 +26,41 @@ namespace game4automation
         // Start is called before the first frame update
         void Start()
         {
-
+            AltValue = 1;
         }
 
         // Update is called once per frame
         void Update()
         {
-            stringOutput = OPCUANodeMachine.Value;
-            Text.text = stringOutput;
+            if (Control.DeveloperMode == false)
+            {
+                stringOutput = OPCUANodeMachine.Value;
+                Text.text = stringOutput;
+            }
+            else
+            {
+                stringOutput = AltValue.ToString();
+                Text.text = stringOutput;
+                CurrentTime = CurrentTime + Time.deltaTime;
+                
+                if( PreviousBool.ActivateNext == true)
+                {
+                    CurrentTime = 0;
+                    ActivateNextBeenActive = true;
+                }
+                if (CurrentTime > InterGateTime && ActivateNextBeenActive == true)
+                {
+                    AltValue = AltValue + 1;
+                    ActivateNextBeenActive = false;
+                    if(AltValue > 10)
+                    {
+                        AltValue = 1;
+                    }
+                }
+
+            }
+            
+            
 
             
         }
