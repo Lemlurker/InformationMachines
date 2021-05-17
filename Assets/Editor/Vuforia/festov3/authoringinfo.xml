@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<QCARInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="QCAR_Dataset_info.xsd">
+    <TargetSet version="3.4">
+        <AreaTarget version="2.1" bbox="-4.5948 -2.1934 -5.0961 3.8134 0.7808 3.2660" targetId="a43eaf0010924c6e8ca8047e74de3602" name="festov3" pathAuthoring="a43eaf0010924c6e8ca8047e74de3602_authoring.glb" pathOcclusion="a43eaf0010924c6e8ca8047e74de3602_occlusion.3dt" pathNavMesh="a43eaf0010924c6e8ca8047e74de3602_navmesh.glb" />
+    </TargetSet>
+</QCARInfo>
