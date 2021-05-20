@@ -11,7 +11,7 @@ namespace game4automation
     public class OPCTestReadString : MonoBehaviour
     {
 
-        public TextMeshPro Text;
+        
         public OPCUA_Node OPCUANodeMachine;
         public ServerControlMaster Control;
         public int AltValue;
@@ -35,12 +35,12 @@ namespace game4automation
             if (Control.DeveloperMode == false)
             {
                 stringOutput = OPCUANodeMachine.Value;
-                Text.text = stringOutput;
+                
             }
             else
             {
                 stringOutput = AltValue.ToString();
-                Text.text = stringOutput;
+                
                 CurrentTime = CurrentTime + Time.deltaTime;
                 
                 if( PreviousBool.ActivateNext == true)

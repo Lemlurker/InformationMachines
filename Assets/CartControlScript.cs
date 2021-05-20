@@ -1,25 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class CartControlScript : MonoBehaviour
+namespace game4automation
 {
-    public bool Arrived;
-    public float RunTime;
-    public float CurrentTime;
-    // Start is called before the first frame update
-    void Start()
-    {
-        CurrentTime = CurrentTime + Time.deltaTime;
-    }
 
-    // Update is called once per frame
-    void Update()
+
+    public class CartControlScript : MonoBehaviour
     {
-        CurrentTime = CurrentTime + Time.deltaTime;
-        if (CurrentTime > RunTime)
+        public bool Arrived;
+        public float RunTime;
+        public float CurrentTime;
+        public OPCTestReadString CurrentValue;
+        private string CurrentValueOld;
+        public ServerControlMaster ServerControl;
+        
+        // Start is called before the first frame update
+        void Start()
         {
-            Arrived = true;
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        { 
+            if(ServerControl.DeveloperMode == true)
+            {
+                CurrentTime = CurrentTime + Time.deltaTime;
+                if (CurrentTime > RunTime)
+                {
+                    Arrived = true;
+                }
+            }
+            
+            if (ServerControl.DeveloperMode == false)
+            {
+                if(CurrentValue.stringOutput != CurrentValueOld)
+                {
+                    Arrived = true;
+                    CurrentValueOld = CurrentValue.stringOutput;
+                }
+            }
+
         }
     }
 }
