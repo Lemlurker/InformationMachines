@@ -6,31 +6,34 @@ namespace game4automation
     {
         public ServerControlMaster DevMode;
         //Machine4
-        public GameObject Machine4ThroughCart;
-        public GameObject Machine4ThroughCartBackup;
-        public float Machine4ThroughDuration;
-        private float Machine4ThroughTime;
-        private float Machine4ThroughTimeBackup;
+        //public GameObject Machine4ThroughCart;
+        //public GameObject Machine4ThroughCartBackup;
+        //public float Machine4ThroughDuration;
+        //private float Machine4ThroughTime;
+        //private float Machine4ThroughTimeBackup;
 
-        //Machine5
-        public GameObject Machine5Cart;
-        public GameObject Machine5BackupCart;
-        public OPCTestReadString Machine5ValueReader;
-        public TextMeshPro Machine5Text;
-        public TextMeshPro Machine5BackupText;
-        public float Machine5To6Duration;
-        private float Machine5RunTime;
-        private float Machine5RunTimeBackup;
-        public GameObject Machine5ReleaseTrigger;
-        public GameObject Machine5HoldTrigger;
-        public bool Machine5Triggered;
-        public JustChanged Machine5JustChanged;
-        public bool Machine5TriggeredStatus;
-        public bool Machine5TriggeredBackup;
-        public GameObject Machine6ArrivedTrigger;
+        //Machine
+        public string MachineID;
+        public GameObject MachineCart;
+        public GameObject MachineBackupCart;
+        public OPCTestReadString MachineValueReader;
+        public TextMeshPro MachineText;
+        public TextMeshPro MachineBackupText;
+        public float MachineToNextDuration;
+        private float MachineRunTime;
+        private float MachineRunTimeBackup;
+        public GameObject MachineReleaseTrigger;
+        
+        public bool MachineTriggered;
+        public JustChanged MachineJustChanged;
+        public bool MachineTriggeredStatus;
+        public bool MachineTriggeredBackup;
+        public GameObject NextMachineTrigger;
+        public bool WorkDoneAtNext;
+        
 
-        private bool Machine5CartArrived;
-        private bool Machine5CartBackupArrived;
+        private bool MachineCartArrived;
+        private bool MachineCartBackupArrived;
         // Start is called before the first frame update
         void Start()
         {
@@ -44,17 +47,17 @@ namespace game4automation
             {
 
 
-                if(Machine5JustChanged.StateChanged == true)
+                if(MachineJustChanged.StateChanged == true)
                 {
-                    Machine5Triggered = true;
+                    MachineTriggered = true;
                 }
                 else
                 {
-                    Machine5Triggered = false;
+                    MachineTriggered = false;
                 }
                 
 
-                if (Machine5ReleaseTrigger.activeInHierarchy == true )
+                /*if (MachineReleaseTrigger.activeInHierarchy == true )
                 {
 
                     if (Machine4ThroughTime > Machine4ThroughDuration && Machine4ThroughCart.activeInHierarchy == true)
@@ -66,60 +69,64 @@ namespace game4automation
                         Machine4ThroughCartBackup.SetActive(false);
                     }
 
-                }
+                }*/
                 
 
-                if (Machine5Triggered == true && Machine5Cart.activeInHierarchy == false)
+                if (MachineTriggered == true && MachineCart.activeInHierarchy == false)
                 {
-                    Machine5Cart.SetActive(true);
-                    Machine5Text.text = Machine5ValueReader.stringOutput;
+                    MachineCart.SetActive(true);
+                    MachineText.text = MachineValueReader.stringOutput;
                     
-                    Machine5RunTime = 0;
-                    if(Machine4ThroughCart.activeInHierarchy == true && Machine4ThroughTime > Machine4ThroughDuration)
+                    MachineRunTime = 0;
+                    /*if(Machine4ThroughCart.activeInHierarchy == true && Machine4ThroughTime > Machine4ThroughDuration)
                     {
                         Machine4ThroughCart.SetActive(false);
                     }
                     if (Machine4ThroughCartBackup.activeInHierarchy == true && Machine4ThroughTimeBackup > Machine4ThroughDuration)
                     {
                         Machine4ThroughCart.SetActive(false);
-                    }
+                    }*/
 
                 }
-                if (Machine5Cart.activeInHierarchy == true)
+                if (MachineCart.activeInHierarchy == true)
                 {
-                    Machine5RunTime = Machine5RunTime + Time.deltaTime;
+                    MachineRunTime = MachineRunTime + Time.deltaTime;
                     
-                    if (Machine5RunTime > Machine5To6Duration)
+                    if (MachineRunTime > MachineToNextDuration)
                     {
-                        Machine5CartArrived = true;
+                        MachineCartArrived = true;
                     }
                 }
                 
-                if (Machine5Triggered == true && Machine5Cart.activeInHierarchy == true && Machine5RunTime > 5)
+                if (MachineTriggered == true && MachineCart.activeInHierarchy == true && MachineRunTime > 5)
                 {
-                    Machine5BackupCart.SetActive(true);
-                    Machine5BackupText.text = Machine5ValueReader.stringOutput;
-                    Machine5RunTimeBackup = 0;
-                    Machine5Triggered = false;
+                    MachineBackupCart.SetActive(true);
+                    MachineBackupText.text = MachineValueReader.stringOutput;
+                    MachineRunTimeBackup = 0;
+                    MachineTriggered = false;
                 }
-                if(Machine5BackupCart.activeInHierarchy == true)
+                if(MachineBackupCart.activeInHierarchy == true)
                 {
-                    Machine5RunTimeBackup = Machine5RunTimeBackup + Time.deltaTime;
-                    if(Machine5RunTimeBackup > Machine5To6Duration)
+                    MachineRunTimeBackup = MachineRunTimeBackup + Time.deltaTime;
+                    if(MachineRunTimeBackup > MachineToNextDuration)
                     {
-                        Machine5CartBackupArrived = true;
+                        MachineCartBackupArrived = true;
                     }
                 }
-                if(Machine5CartArrived == true && Machine6ArrivedTrigger.activeInHierarchy == true)
+                if(MachineCartArrived == true && NextMachineTrigger.activeInHierarchy == true)
                 {
-                    Machine5Cart.SetActive(false);
-                    Machine5CartArrived = false;
+                    MachineCart.SetActive(false);
+                    MachineCartArrived = false;
                 }
-                if(Machine5CartBackupArrived == true && Machine6ArrivedTrigger.activeInHierarchy == true)
+                if(MachineCartBackupArrived == true && NextMachineTrigger.activeInHierarchy == true)
                 {
-                    Machine5BackupCart.SetActive(false);
-                    Machine5CartBackupArrived = false;
+                    MachineBackupCart.SetActive(false);
+                    MachineCartBackupArrived = false;
                 }
+                //if(MachineCart.activeInHierarchy == true && MachineRunTime > MachineToNextDuration + 3)
+                //{
+                //    WorkDoneAtNext = true;
+                //}
 
 
 
