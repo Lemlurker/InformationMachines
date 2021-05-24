@@ -24,9 +24,9 @@ namespace game4automation
         public int LinkedScannerCurrent;
         public int LinkedScannerOld;
         public float BoolTrueTime;
-        
-        
-        
+
+
+
         public string BooleanOutput;
 
         // Start is called before the first frame update
@@ -41,7 +41,7 @@ namespace game4automation
         // Update is called once per frame
         void Update()
         {
-            if(Control.DeveloperMode == false)
+            if (Control.DeveloperMode == false)
             {
                 Value = OPCUANode.Value;
             }
@@ -49,7 +49,7 @@ namespace game4automation
             {
                 LinkedScannerCurrent = LinkedScanner.AltValue;
                 Value = AltValue;
-                if(LinkedScannerCurrent != LinkedScannerOld)
+                if (LinkedScannerCurrent != LinkedScannerOld)
                 {
                     AltValue = "True";
                     BoolTrueTime = BoolTrueTime + Time.deltaTime;
@@ -74,9 +74,9 @@ namespace game4automation
             {
                 On.SetActive(false);
                 Off.SetActive(true);
-                
+
             }
-            if(IfIsTrue != IfIsTrueOld)
+            if (IfIsTrue != IfIsTrueOld)
             {
                 ActivateNext = true;
                 IfIsTrue = false;

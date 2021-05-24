@@ -11,7 +11,7 @@ namespace game4automation
         public GameObject MachineWarningBox;
         public GameObject ErrorText;
         public TextMeshPro ErrorOutput;
-        public OPCTestRead ErrorBool;
+        public OPCErrorRead ErrorBool;
         public float AlarmTime;
         private float AlarmCycleTime;
         public bool AlarmIsActive;
@@ -26,7 +26,7 @@ namespace game4automation
         // Update is called once per frame
         void Update()
         {
-            if(ErrorBool.Value == "True")
+            if(ErrorBool.AlarmIsActive == true)
             {
                 AlarmIsActive = true;
                 ErrorText.SetActive(true);
