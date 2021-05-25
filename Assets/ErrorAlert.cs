@@ -30,11 +30,13 @@ namespace game4automation
             {
                 AlarmIsActive = true;
                 ErrorText.SetActive(true);
+                
             }
             else
             {
                 AlarmIsActive = false;
                 ErrorText.SetActive(false);
+                MachineWarningBox.SetActive(false);
             }
 
             if(AlarmIsActive == true || AlarmTest == true )
