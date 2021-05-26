@@ -9,6 +9,8 @@ public class CartCollisionPauser : MonoBehaviour
     public bool AnimationPaused;
     private bool AnimationPausedOld;
     public float HoldTime;
+    public GameObject ReleaseTrigger;
+    private bool ReleaseTriggerOld;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,14 +35,21 @@ public class CartCollisionPauser : MonoBehaviour
         {
             m_Animator.speed = 1;
         }
+        if(ReleaseTrigger.activeInHierarchy != ReleaseTriggerOld)
+        {
+            ReleaseTriggerOld = ReleaseTrigger.activeInHierarchy;
+        }
+        if(ReleaseTrigger.activeInHierarchy == true && ReleaseTrigger.activeInHierarchy == ReleaseTriggerOld)
+        {
+            AnimationPaused = false;
+            
+        }
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         AnimationPaused = true;
     }
-    private void OnTriggerExit(Collider other)
-    {
-        AnimationPaused = false;
-    }
+  
+    
 }

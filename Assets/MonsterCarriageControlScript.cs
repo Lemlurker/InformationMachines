@@ -20,8 +20,8 @@ namespace game4automation
         public TextMeshPro MachineText;
         public TextMeshPro MachineBackupText;
         public float MachineToNextDuration;
-        private float MachineRunTime;
-        private float MachineRunTimeBackup;
+        public CartClock CartClock1;
+        public CartClock CartClock2;
         public GameObject MachineReleaseTrigger;
         
         public bool MachineTriggered;
@@ -77,7 +77,7 @@ namespace game4automation
                     MachineCart.SetActive(true);
                     MachineText.text = MachineValueReader.stringOutput;
                     
-                    MachineRunTime = 0;
+                    
                     /*if(Machine4ThroughCart.activeInHierarchy == true && Machine4ThroughTime > Machine4ThroughDuration)
                     {
                         Machine4ThroughCart.SetActive(false);
@@ -90,25 +90,25 @@ namespace game4automation
                 }
                 if (MachineCart.activeInHierarchy == true)
                 {
-                    MachineRunTime = MachineRunTime + Time.deltaTime;
                     
-                    if (MachineRunTime > MachineToNextDuration)
+                    
+                    if (CartClock1.CartTime > MachineToNextDuration)
                     {
                         MachineCartArrived = true;
                     }
                 }
                 
-                if (MachineTriggered == true && MachineCart.activeInHierarchy == true && MachineRunTime > 5)
+                if (MachineTriggered == true && MachineCart.activeInHierarchy == true && CartClock1.CartTime > 5)
                 {
                     MachineBackupCart.SetActive(true);
                     MachineBackupText.text = MachineValueReader.stringOutput;
-                    MachineRunTimeBackup = 0;
+                    
                     MachineTriggered = false;
                 }
                 if(MachineBackupCart.activeInHierarchy == true)
                 {
-                    MachineRunTimeBackup = MachineRunTimeBackup + Time.deltaTime;
-                    if(MachineRunTimeBackup > MachineToNextDuration)
+                    
+                    if(CartClock2.CartTime > MachineToNextDuration)
                     {
                         MachineCartBackupArrived = true;
                     }

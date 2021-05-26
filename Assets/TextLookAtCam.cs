@@ -12,7 +12,7 @@ public class TextLookAtCam : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.LookAt(target);
     }
